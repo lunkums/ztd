@@ -1,7 +1,10 @@
 #ifndef ZTD_TYPES_H
 #define ZTD_TYPES_H
 
+#include <stddef.h>
 #include <stdint.h>
+
+#define ZTD_NULL NULL
 
 namespace ztd {
     // Primitive Types
