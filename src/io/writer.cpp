@@ -3,7 +3,17 @@
 #include <stdio.h>
 
 namespace ztd { namespace io {
-    void generic_writer::print(const char* format) {
-        fputs(format, stdout);
+    result<> generic_writer::print(const char* format, ...) {
+        if (fputs(format, stdout)) {
+            return error();
+        }
+        return ok();
+    }
+
+    result<> generic_writer::write_all(const char* format) {
+        if (fputs(format, stdout)) {
+            return error();
+        }
+        return ok();
     }
 }}

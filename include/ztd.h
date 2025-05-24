@@ -1,3 +1,5 @@
+#include "ztd/error.h"
 #include "ztd/fs.h"
 #include "ztd/io.h"
+#include "ztd/result.h"
 #include "ztd/types.h"
