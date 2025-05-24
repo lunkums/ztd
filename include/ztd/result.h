@@ -3,6 +3,8 @@
 
 #include "ztd/error.h"
 
+#include <string.h>
+
 namespace ztd {
     struct ok {
         explicit ok() {}
@@ -79,12 +81,11 @@ namespace ztd {
             return m_storage.m_error;
         }
       private:
-        union storage {
+        // TODO: Replace with a type-safe union. Can't use the built-in union because it only
+        // supports POD and error is a complex type
+        struct storage {
             T m_data;
             ztd::error m_error;
-
-            storage() : m_data() {}
-            ~storage() {}
         };
 
         storage m_storage;

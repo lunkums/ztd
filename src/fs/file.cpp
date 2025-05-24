@@ -2,6 +2,6 @@
 
 namespace ztd { namespace fs {
     io::writer file::writer() {
-        return {};
+        return io::writer();
     }
 }}

@@ -9,7 +9,7 @@ namespace ztd {
         error() : m_what(ZTD_NULL) {}
         explicit error(const char* message) : m_what(message) {}
 
-        virtual const char* what() const {
+        const char* what() const {
             return m_what ? m_what : "unknown error";
         }
 

@@ -2,6 +2,6 @@
 
 namespace ztd { namespace io {
     fs::file get_std_out() {
-        return {};
+        return fs::file();
     }
 }}
