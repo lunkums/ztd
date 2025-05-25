@@ -3,8 +3,6 @@
 
 #include "ztd/error.h"
 
-#include <string.h>
-
 namespace ztd {
     struct ok {
         explicit ok() {}

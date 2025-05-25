@@ -17,16 +17,65 @@ namespace ztd {
     typedef int64_t i64;
     typedef uint64_t u64;
     // typedef __int128 i128; // FIXME: Implement this
-    typedef unsigned u128;
+    // typedef unsigned __int128 u128; // FIXME: Implement this
     typedef intptr_t isize;
     typedef uintptr_t usize;
     // typedef _Float16 f16; // FIXME: Implement this
     typedef float f32;
     typedef double f64;
-    typedef long f80;
+    typedef long double f80;
     // typedef _Float128 f128; // FIXME: Implement this
     typedef void anyopaque;
     typedef int anyerror; // TODO: Revisit this
+
+    // A fat pointer
+    template<typename T>
+    struct slice {
+        T& operator[](usize index) {
+            return ptr[index];
+        }
+
+        const T& operator[](usize index) const {
+            return ptr[index];
+        }
+
+        T* ptr;
+        usize len;
+    };
+
+    struct none_type {};
+    const none_type none;
+
+    template<typename T>
+    class optional {
+      public:
+        optional() : m_has_value(false) {}
+        optional(none_type) : m_has_value(false) {}
+        optional(T value) : m_value(value), m_has_value(true) {}
+
+        bool has_value() const {
+            return m_has_value;
+        }
+
+        T& value() {
+            return m_value;
+        }
+
+        const T& value() const {
+            return m_value;
+        }
+
+        T& operator*() {
+            return m_value;
+        }
+
+        const T& operator*() const {
+            return m_value;
+        }
+      private:
+        T m_value;
+        bool m_has_value;
+    };
 }
 
 #endif
