@@ -31,6 +31,13 @@ namespace ztd {
     // A fat pointer
     template<typename T>
     struct slice {
+        slice() : ptr(ZTD_NULL), len(0) {}
+
+        template<usize N>
+        slice(T (&ptr)[N]) : ptr(ptr), len(N) {}
+
+        slice(T* ptr, usize len) : ptr(ptr), len(len) {}
+
         T& operator[](usize index) {
             return ptr[index];
         }

@@ -1,3 +1,4 @@
+#include "ztd/debug.h"
 #include "ztd/error.h"
 #include "ztd/fs.h"
 #include "ztd/heap.h"
