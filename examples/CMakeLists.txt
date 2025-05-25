@@ -1,3 +1,3 @@
-add_subdirectory(fixed_buffer_allocator)
+add_subdirectory(allocators)
 add_subdirectory(fizz_buzz)
 add_subdirectory(hello_world)

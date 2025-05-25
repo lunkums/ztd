@@ -32,7 +32,7 @@ namespace ztd { namespace heap {
         }
 
         mem::allocator allocator() {
-            mem::vtable vtable;
+            struct mem::allocator::vtable vtable;
             vtable.alloc = &fixed_buffer_allocator::alloc;
             // vtable.resize = ?;
             // vtable.remap = ?;
