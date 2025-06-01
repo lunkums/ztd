@@ -7,7 +7,9 @@
 #define ZTD_NULL NULL
 
 namespace ztd {
+    // ********************************************************************************************
     // Primitive Types
+    // ********************************************************************************************
     typedef int8_t i8;
     typedef uint8_t u8;
     typedef int16_t i16;
@@ -28,27 +30,11 @@ namespace ztd {
     typedef void anyopaque;
     typedef int anyerror; // TODO: Revisit this
 
-    // A fat pointer
-    template<typename T>
-    struct slice {
-        slice() : ptr(ZTD_NULL), len(0) {}
-
-        template<usize N>
-        slice(T (&ptr)[N]) : ptr(ptr), len(N) {}
-
-        slice(T* ptr, usize len) : ptr(ptr), len(len) {}
-
-        T& operator[](usize index) {
-            return ptr[index];
-        }
-
-        const T& operator[](usize index) const {
-            return ptr[index];
-        }
-
-        T* ptr;
-        usize len;
-    };
+    // ********************************************************************************************
+    // Extra types
+    // ********************************************************************************************
+    typedef u32 u21;
+    typedef u8 u3;
 
     struct none_type {};
     const none_type none;
@@ -82,6 +68,69 @@ namespace ztd {
       private:
         T m_value;
         bool m_has_value;
+    };
+
+    template<typename T, usize N>
+    struct array {
+        T& operator[](usize index) {
+            return data[index];
+        }
+
+        const T& operator[](usize index) const {
+            return data[index];
+        }
+
+        usize len() const {
+            return N;
+        }
+
+        T* ptr() {
+            return data;
+        }
+
+        const T* ptr() const {
+            return data;
+        }
+
+        T data[N];
+    };
+
+    // A fat pointer
+    template<typename T>
+    struct slice {
+        slice() : ptr(ZTD_NULL), len(0) {}
+
+        template<usize N>
+        slice(T (&ptr)[N]) : ptr(ptr), len(N) {}
+
+        slice(T* ptr, usize len) : ptr(ptr), len(len) {}
+
+        T& operator[](usize index) {
+            return ptr[index];
+        }
+
+        const T& operator[](usize index) const {
+            return ptr[index];
+        }
+
+        slice<T> operator()(usize start) const {
+            return slice<T>(ptr + start, len - start);
+        }
+
+        slice<T> operator()(usize start, usize end) const {
+            if (start > len) start = len;
+            if (end > len) end = len;
+            if (start > end) start = end;
+
+            return slice<T>(ptr + start, end - start);
+        }
+
+        T* operator*() {
+            return ptr;
+        }
+
+        T* ptr;
+        usize len;
     };
 }
 

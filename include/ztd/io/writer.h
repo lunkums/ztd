@@ -5,9 +5,14 @@
 
 namespace ztd { namespace io {
     struct generic_writer {
-        result<> print(const char* format, ...);
+        result<usize> write(slice<const char> bytes);
 
-        result<> write_all(const char* format);
+        result<> write_all(slice<const char> format);
+
+        result<> print(slice<const char> format, ...);
+
+        void* const context;
+        result<usize> (*const write_fn)(void* const context, slice<const char> bytes);
     };
 
     typedef generic_writer writer;
