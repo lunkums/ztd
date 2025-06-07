@@ -1,17 +1,17 @@
 #ifndef ZTD_POSIX_H
 #define ZTD_POSIX_H
 
-#include <stdlib.h>
-#include <time.h>
+#include "ztd/result.h"
+#include "ztd/types.h"
+
+#include <unistd.h>
 
 namespace ztd { namespace posix {
-    result<> getrandom(slice<u8> buffer) {
-        std::srand(time(ZTD_NULL));
-        for (usize i = 0; i < buffer.len; ++i) {
-            buffer[i] = std::rand() % 256;
-        }
-        return ok();
-    }
+    typedef int fd_t;
+
+    const fd_t stdout_fileno = STDOUT_FILENO;
+
+    Result<> getrandom(Slice<u8> buffer);
 }}
 
 #endif

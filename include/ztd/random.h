@@ -5,19 +5,19 @@
 #include "ztd/math.h"
 
 namespace ztd {
-    struct random {
-        typedef void (*fill_func)(void*, slice<u8>);
+    struct Random {
+        typedef void (*FillFn)(void*, Slice<u8>);
 
         void* ptr;
-        fill_func fill_fn;
+        FillFn fill_fn;
 
-        random(void* ptr, fill_func fill_fn) : ptr(ptr), fill_fn(fill_fn) {}
+        Random(void* ptr, FillFn fill_fn) : ptr(ptr), fill_fn(fill_fn) {}
 
-        static random init(void* pointer, fill_func fill_fn) {
-            return random(pointer, fill_fn);
+        static Random init(void* pointer, FillFn fill_fn) {
+            return Random(pointer, fill_fn);
         }
 
-        void bytes(slice<u8> buf) {
+        void bytes(Slice<u8> buf) {
             fill_fn(ptr, buf);
         }
 
@@ -25,11 +25,11 @@ namespace ztd {
         T integer() {
             const u16 bits = builtin::type_info<T>().integer.bits;
             // const UnsignedT = std.meta.Int(.unsigned, bits);
-            result<u16> result = math::div_ceil<u16>(bits, 8);
+            Result<u16> result = math::div_ceil<u16>(bits, 8);
             if (result.is_error()) throw 1;
             const u16 ceil_bytes = *result;
 
-            array<u8, sizeof(T)> rand_bytes;
+            Array<u8, sizeof(T)> rand_bytes;
             bytes(rand_bytes);
 
             T value = 0;
@@ -101,11 +101,11 @@ namespace ztd {
     };
 
     namespace rand {
-        struct split_mix64 {
+        struct SplitMix64 {
             u64 s;
 
-            static split_mix64 init(u64 seed) {
-                split_mix64 x;
+            static SplitMix64 init(u64 seed) {
+                SplitMix64 x;
                 x.s = seed;
                 return x;
             }
@@ -127,17 +127,17 @@ namespace ztd {
             }
         };
 
-        struct xoshiro256 {
-            array<u64, 4> s;
+        struct Xoshiro256 {
+            Array<u64, 4> s;
 
-            static xoshiro256 init(u64 init_s) {
-                xoshiro256 x;
+            static Xoshiro256 init(u64 init_s) {
+                Xoshiro256 x;
                 x.seed(init_s);
                 return x;
             }
 
-            random random() {
-                return ztd::random::init(this, &xoshiro256::fill);
+            Random random() {
+                return ztd::Random::init(this, &Xoshiro256::fill);
             }
 
             u64 next() {
@@ -157,11 +157,11 @@ namespace ztd {
                 return r;
             }
 
-            static void fill(void* self, slice<u8> buf) {
-                reinterpret_cast<xoshiro256*>(self)->fill(buf);
+            static void fill(void* self, Slice<u8> buf) {
+                reinterpret_cast<Xoshiro256*>(self)->fill(buf);
             }
 
-            void fill(slice<u8> buf) {
+            void fill(Slice<u8> buf) {
                 usize i = 0;
                 const usize aligned_len = buf.len - (buf.len & 7);
 
@@ -190,7 +190,7 @@ namespace ztd {
 
             void seed(u64 init_s) {
                 // Xoshiro requires 256-bits of seed.
-                split_mix64 gen = split_mix64::init(init_s);
+                SplitMix64 gen = SplitMix64::init(init_s);
 
                 s[0] = gen.next();
                 s[1] = gen.next();
@@ -199,7 +199,7 @@ namespace ztd {
             }
         };
 
-        typedef rand::xoshiro256 default_prng;
+        typedef rand::Xoshiro256 DefaultPrng;
     }
 }
 

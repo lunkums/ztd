@@ -6,7 +6,7 @@
 #include "ztd/heap/page_allocator.h"
 
 namespace ztd { namespace heap {
-    typedef debug_allocator general_purpose_allocator;
+    typedef DebugAllocator GeneralPurposeAllocator;
 }}
 
 #endif

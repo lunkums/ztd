@@ -2,16 +2,19 @@
 #define ZTD_FS_FILE_H
 
 #include "ztd/io/writer.h"
+#include "ztd/posix.h"
 
 namespace ztd { namespace fs {
-    struct file {
-        typedef int Handle;
+    struct File {
+        typedef posix::fd_t Handle;
 
         Handle handle;
 
-        file(Handle handle) : handle(handle) {}
+        File(Handle handle) : handle(handle) {}
 
-        io::writer writer();
+        typedef io::Writer Writer;
+
+        Writer writer();
     };
 }}
 

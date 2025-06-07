@@ -22,7 +22,7 @@ endif()
 
 # file(GLOB ZTD_SOURCES "src/*.cpp")
 set(ZTD_SOURCES "src/fs/file.cpp" "src/io/writer.cpp" "src/debug.cpp"
-                "src/io.cpp")
+                "src/io.cpp" "src/posix.cpp")
 
 add_library(ztd STATIC ${ZTD_SOURCES})
 

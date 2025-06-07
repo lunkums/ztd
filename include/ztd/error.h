@@ -4,20 +4,20 @@
 #include "ztd/types.h"
 
 namespace ztd {
-    class error {
+    class Error {
       public:
-        error() : m_what(ZTD_NULL) {}
-        explicit error(const char* message) : m_what(message) {}
+        Error() : m_what(ZTD_NULL) {}
+        explicit Error(const char* message) : m_what(message) {}
 
         const char* what() const {
             return m_what ? m_what : "unknown error";
         }
 
-        bool operator==(const error& other) const {
+        bool operator==(const Error& other) const {
             return m_what == other.m_what;
         }
 
-        bool operator!=(const error& other) const {
+        bool operator!=(const Error& other) const {
             return m_what != other.m_what;
         }
 

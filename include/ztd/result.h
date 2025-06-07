@@ -4,22 +4,22 @@
 #include "ztd/error.h"
 
 namespace ztd {
-    struct ok {
-        explicit ok() {}
+    struct Ok {
+        explicit Ok() {}
     };
 
-    template<typename T = ok>
-    class result {
+    template<typename T = Ok>
+    class Result {
       public:
-        result(const T& m_data) : m_is_error(false) {
+        Result(const T& m_data) : m_is_error(false) {
             m_storage.m_data = m_data;
         }
 
-        result(error m_error) : m_is_error(true) {
+        Result(Error m_error) : m_is_error(true) {
             m_storage.m_error = m_error;
         }
 
-        result(const result& other) : m_is_error(other.m_is_error) {
+        Result(const Result& other) : m_is_error(other.m_is_error) {
             if (m_is_error) {
                 m_storage.m_error = other.m_storage.m_error;
             } else {
@@ -27,7 +27,7 @@ namespace ztd {
             }
         }
 
-        result& operator=(const result& other) {
+        Result& operator=(const Result& other) {
             if (this != &other) {
                 m_is_error = other.m_is_error;
                 if (m_is_error) {
@@ -71,22 +71,22 @@ namespace ztd {
             return &m_storage.m_data;
         }
 
-        ztd::error& error() {
+        ztd::Error& error() {
             return m_storage.m_error;
         }
 
-        const ztd::error& error() const {
+        const ztd::Error& error() const {
             return m_storage.m_error;
         }
       private:
-        // TODO: Replace with a type-safe union. Can't use the built-in union because it only
-        // supports POD and error is a complex type
-        struct storage {
+        // TODO: Replace with a Type-safe union. Can't use the built-in union because it only
+        // supports POD and error is a complex Type
+        struct Storage {
             T m_data;
-            ztd::error m_error;
+            ztd::Error m_error;
         };
 
-        storage m_storage;
+        Storage m_storage;
         bool m_is_error;
     };
 }
@@ -96,10 +96,10 @@ namespace ztd {
 
 #define ZTD_UNIQUE_NAME(base) ZTD_CONCAT(ZTD_CONCAT(base, _), __LINE__)
 
-// TODO: Update this macro to allow the user to specify a type for the result
+// TODO: Update this macro to allow the user to specify a Type for the result
 #define ZTD_TRY(expr) \
     do { \
-        ztd::result<> ZTD_UNIQUE_NAME(ztd_result) = (expr); \
+        ztd::Result<> ZTD_UNIQUE_NAME(ztd_result) = (expr); \
         if (ZTD_UNIQUE_NAME(ztd_result).is_error()) { \
             return ZTD_UNIQUE_NAME(ztd_result).error(); \
         } \

@@ -4,15 +4,15 @@ using namespace ztd;
 #include <stdio.h>
 
 int main() {
-    io::writer writer = io::get_std_out().writer();
-    array<u8, 1024> buffer;
-    heap::fixed_buffer_allocator fba = heap::fixed_buffer_allocator::init(buffer);
-    mem::allocator allocator = fba.allocator();
+    io::Writer writer = io::get_std_out().writer();
+    Array<u8, 1024> buffer;
+    heap::FixedBufferAllocator fba = heap::FixedBufferAllocator::init(buffer);
+    mem::Allocator allocator = fba.allocator();
 
     u64 seed;
     posix::getrandom(mem::as_bytes(&seed));
-    rand::default_prng prng = rand::default_prng::init(seed);
-    random random = prng.random();
+    rand::DefaultPrng prng = rand::DefaultPrng::init(seed);
+    Random random = prng.random();
 
     u8 target_number = random.int_range_at_most<u8>(1, 100);
 

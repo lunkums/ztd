@@ -9,14 +9,14 @@
 #include <stdarg.h>
 
 namespace ztd { namespace fmt {
-    struct alignment {
-        enum enum_type {
+    struct Alignment {
+        enum EnumType {
             left,
             center,
             right
         };
 
-        ZTD_DECLARE_ENUM_TYPE(alignment, int)
+        ZTD_DECLARE_ENUM_TYPE(Alignment, int)
         ZTD_ENUM_TYPE(left, "left")
         ZTD_ENUM_TYPE(center, "center")
         ZTD_ENUM_TYPE(right, "right")
@@ -24,22 +24,22 @@ namespace ztd { namespace fmt {
     };
 
     // TODO: Should be a tagged union
-    struct specifier {
-        struct foo {
-            none_type none;
+    struct Specifier {
+        struct Foo {
+            NoneType none;
             usize number;
-            slice<const char> named;
+            Slice<const char> named;
         };
     };
 
-    const alignment default_alignment = alignment::right;
+    const Alignment default_alignment = Alignment::right;
     const char default_fill_char = ' ';
 
-    struct format_options {
-        format_options(
-            optional<usize> precision = none,
-            optional<usize> width = none,
-            alignment alignment = default_alignment,
+    struct FormatOptions {
+        FormatOptions(
+            Optional<usize> precision = none,
+            Optional<usize> width = none,
+            Alignment alignment = default_alignment,
             u32 fill = default_fill_char
         ) :
             precision(precision),
@@ -47,46 +47,46 @@ namespace ztd { namespace fmt {
             alignment(alignment),
             fill(fill) {}
 
-        optional<usize> precision;
-        optional<usize> width;
-        alignment alignment;
+        Optional<usize> precision;
+        Optional<usize> width;
+        Alignment alignment;
         u32 fill;
     };
 
-    struct parser {
+    struct Parser {
         // FIXME: Implement me
-        // std::unicode::utf8_iterator iter;
+        // std::unicode::Utf8Iterator iter;
 
-        optional<u32> peek(usize n) {
+        Optional<u32> peek(usize n) {
             return none;
         }
 
-        optional<usize> number() {
-            optional<usize> r = none;
+        Optional<usize> number() {
+            Optional<usize> r = none;
 
             return r;
         }
     };
 
-    struct placeholder {
-        static placeholder parse(const char* str) {
-            // const unicode::utf8_view view = unicode::utf8_view::init_comptime(str);
-            return placeholder();
+    struct PlaceHolder {
+        static PlaceHolder parse(const char* str) {
+            // const unicode::Utf8View view = unicode::Utf8View::init_comptime(str);
+            return PlaceHolder();
         }
 
-        slice<const char> specifier_arg;
+        Slice<const char> specifier_arg;
         // TODO: Implement an arbitrary-length uint (i.e. u<21>)
         u32 fill;
-        alignment alignment;
-        specifier arg;
-        specifier width;
-        specifier precision;
+        Alignment alignment;
+        Specifier arg;
+        Specifier width;
+        Specifier precision;
     };
 
-    typedef u32 arg_set_type;
+    typedef u32 ArgSetType;
 
-    struct arg_state {
-        arg_state(usize args_len, usize next_arg = 0, arg_set_type used_args = 0) :
+    struct ArgState {
+        ArgState(usize args_len, usize next_arg = 0, ArgSetType used_args = 0) :
             args_len(args_len),
             next_arg(next_arg),
             used_args(used_args) {}
@@ -98,13 +98,13 @@ namespace ztd { namespace fmt {
         }
 
         usize next_arg;
-        arg_set_type used_args;
+        ArgSetType used_args;
         usize args_len;
     };
 
-    result<> format(slice<const char> fmt, va_list args) {
+    Result<> format(Slice<const char> fmt, va_list args) {
         usize i = 0;
-        slice<const char> literal = "";
+        Slice<const char> literal = "";
         while (true) {
             usize start_index = i;
 
@@ -173,7 +173,7 @@ namespace ztd { namespace fmt {
             //comptime assert(fmt[i] == '}');
             i += 1;
 
-            const placeholder placeholder = placeholder::parse(*fmt(fmt_begin, fmt_end));
+            const PlaceHolder placeholder = PlaceHolder::parse(*fmt(fmt_begin, fmt_end));
             //                 const arg_pos = comptime switch (placeholder.arg) {
             //                     .none = > null, .number = > | pos | pos,
             //                     .named = > |
@@ -225,7 +225,7 @@ namespace ztd { namespace fmt {
             //     std.options.fmt_max_depth,
             // );
         }
-        return ok();
+        return Ok();
     }
 
 }}

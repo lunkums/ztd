@@ -5,7 +5,9 @@
 #include "ztd/io/writer.h"
 
 namespace ztd { namespace io {
-    fs::file get_std_out();
+    posix::fd_t get_std_out_handle();
+
+    fs::File get_std_out();
 }}
 
 #endif

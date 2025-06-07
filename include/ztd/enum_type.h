@@ -27,16 +27,16 @@ SOFTWARE.
 #ifndef ZTD_ENUM_TYPE_INCLUDED
 #define ZTD_ENUM_TYPE_INCLUDED
 
-///\defgroup enum_type enum_type
+///\defgroup EnumType EnumType
 /// Smart enumerations.<br>
 /// A method of declaring enumerations that allow grouping within a structure.
 /// Avoids the problem of clashing names that can occur with standard enumerations.
-/// One way to think of the code is as a type with built-in constants and an optional conversion to a string.<br><br>
+/// One way to think of the code is as a Type with built-in constants and an optional conversion to a string.<br><br>
 /// <b>Declaring the enumeration.</b>
 ///\code
 /// struct CompassDirection
 /// {
-///   enum enum_type
+///   enum EnumType
 ///   {
 ///     North = 0,
 ///     South = 180,
@@ -78,16 +78,16 @@ SOFTWARE.
 //*****************************************************************************
 #define ZTD_DECLARE_ENUM_TYPE(TypeName, ValueType) \
     typedef ValueType value_type; \
-    TypeName() : value(static_cast<enum_type>(value_type())) {} \
-    TypeName(enum_type value_) : value(value_) {} \
-    explicit TypeName(value_type value_) : value(static_cast<enum_type>(value_)) {} \
+    TypeName() : value(static_cast<EnumType>(value_type())) {} \
+    TypeName(EnumType value_) : value(value_) {} \
+    explicit TypeName(value_type value_) : value(static_cast<EnumType>(value_)) {} \
     operator value_type() const { \
         return static_cast<value_type>(value); \
     } \
     value_type get_value() const { \
         return static_cast<value_type>(value); \
     } \
-    enum_type get_enum() const { \
+    EnumType get_enum() const { \
         return value; \
     } \
     const char* c_str() const { \
@@ -108,6 +108,6 @@ SOFTWARE.
         } \
         } \
       private: \
-        enum_type value;
+        EnumType value;
 
 #endif

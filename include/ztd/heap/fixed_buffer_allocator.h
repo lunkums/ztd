@@ -6,33 +6,33 @@
 #include "ztd/types.h"
 
 namespace ztd { namespace heap {
-    struct fixed_buffer_allocator {
-        static optional<u8*> alloc(void* ctx, usize n, mem::alignment alignment, usize ra) {
-            return reinterpret_cast<fixed_buffer_allocator*>(ctx)->alloc(n, alignment, ra);
+    struct FixedBufferAllocator {
+        static Optional<u8*> alloc(void* ctx, usize n, mem::Alignment alignment, usize ra) {
+            return reinterpret_cast<FixedBufferAllocator*>(ctx)->alloc(n, alignment, ra);
         }
 
-        static fixed_buffer_allocator init(slice<u8> buffer) {
-            fixed_buffer_allocator a;
+        static FixedBufferAllocator init(Slice<u8> buffer) {
+            FixedBufferAllocator a;
             a.buffer = buffer;
             a.end_index = 0;
             return a;
         }
 
-        mem::allocator allocator() {
-            struct mem::allocator::vtable vtable;
-            vtable.alloc = &fixed_buffer_allocator::alloc;
+        mem::Allocator allocator() {
+            mem::Allocator::VTable vtable;
+            vtable.alloc = &FixedBufferAllocator::alloc;
             // vtable.resize = ?;
             // vtable.remap = ?;
             // vtable.free = ?;
-            mem::allocator a;
+            mem::Allocator a;
             a.ptr = this;
             a.vtable = vtable;
             return a;
         }
 
-        optional<u8*> alloc(usize n, mem::alignment alignment, usize ra) {
+        Optional<u8*> alloc(usize n, mem::Alignment alignment, usize ra) {
             usize ptr_align = alignment.to_byte_units();
-            optional<usize> adjusted_off =
+            Optional<usize> adjusted_off =
                 mem::align_pointer_offset(buffer.ptr + end_index, ptr_align);
             if (!adjusted_off.has_value()) {
                 return none;
@@ -51,7 +51,7 @@ namespace ztd { namespace heap {
         }
 
         usize end_index;
-        slice<u8> buffer;
+        Slice<u8> buffer;
     };
 }}
 

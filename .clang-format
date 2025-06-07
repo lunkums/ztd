@@ -137,7 +137,7 @@ IncludeCategories:
     Priority: 2
   - Regex: ^<.*>$
     Priority: 3
-# Consider "*" part of the type and prefer to keep it with the type name
+# Consider "*" part of the Type and prefer to keep it with the Type name
 PointerAlignment: Left
 ReferenceAlignment: Left
 SortIncludes: CaseInsensitive

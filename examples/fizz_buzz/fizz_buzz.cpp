@@ -1,7 +1,7 @@
 #include <ztd.h>
 
 int main() {
-    ztd::io::writer stdout = ztd::io::get_std_out().writer();
+    ztd::io::Writer stdout = ztd::io::get_std_out().writer();
     ztd::usize i = 1;
     while (i <= 16) {
         if (i % 15 == 0) {

@@ -37,15 +37,15 @@ namespace ztd {
     typedef u32 u21;
     typedef u8 u3;
 
-    struct none_type {};
-    const none_type none;
+    struct NoneType {};
+    const NoneType none;
 
     template<typename T>
-    class optional {
+    class Optional {
       public:
-        optional() : m_has_value(false) {}
-        optional(none_type) : m_has_value(false) {}
-        optional(T value) : m_value(value), m_has_value(true) {}
+        Optional() : m_has_value(false) {}
+        Optional(NoneType) : m_has_value(false) {}
+        Optional(T value) : m_value(value), m_has_value(true) {}
 
         bool has_value() const {
             return m_has_value;
@@ -73,13 +73,13 @@ namespace ztd {
 
     // A fat pointer
     template<typename T>
-    struct slice {
-        slice() : ptr(ZTD_NULL), len(0) {}
+    struct Slice {
+        Slice() : ptr(ZTD_NULL), len(0) {}
 
         template<usize N>
-        slice(T (&ptr)[N]) : ptr(ptr), len(N) {}
+        Slice(T (&ptr)[N]) : ptr(ptr), len(N) {}
 
-        slice(T* ptr, usize len) : ptr(ptr), len(len) {}
+        Slice(T* ptr, usize len) : ptr(ptr), len(len) {}
 
         T& operator[](usize index) {
             return ptr[index];
@@ -89,16 +89,16 @@ namespace ztd {
             return ptr[index];
         }
 
-        slice<T> operator()(usize start) const {
-            return slice<T>(ptr + start, len - start);
+        Slice<T> operator()(usize start) const {
+            return Slice<T>(ptr + start, len - start);
         }
 
-        slice<T> operator()(usize start, usize end) const {
+        Slice<T> operator()(usize start, usize end) const {
             if (start > len) start = len;
             if (end > len) end = len;
             if (start > end) start = end;
 
-            return slice<T>(ptr + start, end - start);
+            return Slice<T>(ptr + start, end - start);
         }
 
         T* operator*() {
@@ -110,10 +110,10 @@ namespace ztd {
     };
 
     template<typename T, usize N>
-    struct array {
-        array() {}
+    struct Array {
+        Array() {}
 
-        array(const T (&arr)[N]) {
+        Array(const T (&arr)[N]) {
             for (usize i = 0; i < N; ++i) {
                 ptr[i] = arr[i];
             }
@@ -136,12 +136,12 @@ namespace ztd {
         }
 
         // TODO: Should this be the & operator, instead?
-        operator slice<T>() {
-            return slice<T>(ptr, N);
+        operator Slice<T>() {
+            return Slice<T>(ptr, N);
         }
 
-        operator const slice<T>() const {
-            return slice<T>(ptr, N);
+        operator const Slice<T>() const {
+            return Slice<T>(ptr, N);
         }
 
         T ptr[N];

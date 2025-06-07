@@ -38,7 +38,7 @@ namespace ztd { namespace math {
 
     template<typename T>
     T min_int() {
-        builtin::type info = builtin::type_info<T>();
+        builtin::Type info = builtin::type_info<T>();
         u16 bit_count = info.integer.bits;
         if (!info.integer.is_signed) return 0;
         if (bit_count == 0) return 0;
@@ -52,12 +52,12 @@ namespace ztd { namespace math {
     }
 
     template<typename T>
-    result<T> div_ceil(T numerator, T denominator) {
+    Result<T> div_ceil(T numerator, T denominator) {
         // TODO: Implement setRuntimeSafety
         //@setRuntimeSafety(false);
-        if (denominator == 0) return error("division by zero");
+        if (denominator == 0) return Error("division by zero");
         if (numerator < 0 and denominator < 0) {
-            if (numerator == min_int<T>() and denominator == -1) return error("overflow");
+            if (numerator == min_int<T>() and denominator == -1) return Error("overflow");
             return builtin::div_floor<T>(numerator + 1, denominator) + 1;
         }
         if (numerator > 0 and denominator > 0)

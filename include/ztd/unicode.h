@@ -6,7 +6,7 @@
 namespace ztd { namespace unicode {
     const u21 replacement_character = 0xFFFD;
 
-    result<u3> utf8_byte_sequence_length(u8 first_byte) {
+    Result<u3> utf8_byte_sequence_length(u8 first_byte) {
         // The switch is optimized much better than a "smart" approach using @clz
 
         if (first_byte <= 0x7F) return 1; // 0b0111_1111
@@ -14,11 +14,11 @@ namespace ztd { namespace unicode {
         if (first_byte >= 0xE0 && first_byte <= 0xEF) return 3; // 0b1110_0000 to 0b1110_1111
         if (first_byte >= 0xF0 && first_byte <= 0xF7) return 4; // 0b1111_0000 to 0b1111_0111
 
-        return error("invalid UTF-8 start byte");
+        return Error("invalid UTF-8 start byte");
     }
 
     /// Deprecated. This function has an awkward API that is too easy to use incorrectly.
-    result<u21> utf8_decode(slice<const char> bytes) {
+    Result<u21> utf8_decode(Slice<const char> bytes) {
         switch (bytes.len) {
             case 1:
                 return bytes[0];
@@ -34,13 +34,13 @@ namespace ztd { namespace unicode {
         };
     }
 
-    enum surrogates {
+    enum Surrogates {
         cannot_encode_surrogate_half,
         can_encode_surrogate_half
     };
 
-    bool utf8_validate_slice_impl(slice<const char> input, surrogates surrogates) {
-        slice<const char> remaining = input;
+    bool utf8_validate_slice_impl(Slice<const char> input, Surrogates surrogates) {
+        Slice<const char> remaining = input;
 
         // TODO: Implement this
         // if (std.simd.suggestVectorLength(u8)) | chunk_len | {
@@ -170,17 +170,17 @@ namespace ztd { namespace unicode {
     }
 
     /// Returns true if the input consists entirely of UTF-8 codepoints
-    bool utf8_validate_slice(slice<const char> input) {
+    bool utf8_validate_slice(Slice<const char> input) {
         return utf8_validate_slice_impl(input, cannot_encode_surrogate_half);
     }
 
-    struct utf8_iterator {
-        optional<slice<const char> > next_codepoint_slice() {
+    struct Utf8Iterator {
+        Optional<Slice<const char> > next_codepoint_slice() {
             if (i >= bytes.len) {
                 return none;
             }
 
-            result<u3> cp_len = utf8_byte_sequence_length(bytes[i]);
+            Result<u3> cp_len = utf8_byte_sequence_length(bytes[i]);
             if (cp_len.is_error()) {
                 // unreachable
                 throw 1;
@@ -189,24 +189,24 @@ namespace ztd { namespace unicode {
             return bytes(i - *cp_len, i);
         }
 
-        optional<u21> next_codepoint() {
-            optional<slice<const char> > slice = next_codepoint_slice();
+        Optional<u21> next_codepoint() {
+            Optional<Slice<const char> > slice = next_codepoint_slice();
             if (!slice.has_value()) return none;
-            result<u21> r = utf8_decode(*slice);
+            Result<u21> r = utf8_decode(*slice);
             if (r.is_error()) throw 1;
             return *r;
         }
 
         /// Look ahead at the next n codepoints without advancing the iterator.
         /// If fewer than n codepoints are available, then return the remainder of the string.
-        slice<const char> peek(usize n) {
+        Slice<const char> peek(usize n) {
             usize original_i = i;
             // defer i = original_i;
 
             usize end_ix = original_i;
             usize found = 0;
             while (found < n) {
-                optional<slice<const char> > next_codepoint = next_codepoint_slice();
+                Optional<Slice<const char> > next_codepoint = next_codepoint_slice();
                 if (next_codepoint.has_value()) {
                     return bytes(original_i);
                 }
@@ -218,27 +218,27 @@ namespace ztd { namespace unicode {
             return bytes(original_i, end_ix);
         }
 
-        slice<const char> bytes;
+        Slice<const char> bytes;
         usize i;
     };
 
-    struct utf8_view {
-        static result<utf8_view> init(slice<const char> s) {
+    struct Utf8View {
+        static Result<Utf8View> init(Slice<const char> s) {
             if (!utf8_validate_slice(s)) {
-                return error("invalid utf8");
+                return Error("invalid utf8");
             }
-            return utf8_view();
+            return Utf8View();
         }
 
-        static utf8_view init_comptime(slice<const char> s) {
-            result<utf8_view> result = init(s);
+        static Utf8View init_comptime(Slice<const char> s) {
+            Result<Utf8View> result = init(s);
             if (result.is_error()) {
                 throw 1;
             }
             return *result;
         }
 
-        slice<const char> bytes;
+        Slice<const char> bytes;
     };
 }}
 

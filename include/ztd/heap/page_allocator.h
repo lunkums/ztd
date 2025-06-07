@@ -2,8 +2,8 @@
 #define ZTD_HEAP_PAGE_ALLOCATOR_H
 
 namespace ztd { namespace heap {
-    struct page_allocator {
-        static optional<u8*> alloc(void*, usize n, mem::alignment alignment, usize ra) {
+    struct PageAllocator {
+        static Optional<u8*> alloc(void*, usize n, mem::Alignment alignment, usize ra) {
             // FIXME: Implement me
             //assert(n > 0);
             //return map(n, alignment);
@@ -12,8 +12,8 @@ namespace ztd { namespace heap {
 
         static bool resize(
             void*,
-            slice<u8> memory,
-            mem::alignment alignment,
+            Slice<u8> memory,
+            mem::Alignment alignment,
             usize new_len,
             usize return_address
         ) {
@@ -22,10 +22,10 @@ namespace ztd { namespace heap {
             return false;
         }
 
-        static optional<u8*> remap(
+        static Optional<u8*> remap(
             void*,
-            slice<u8> memory,
-            mem::alignment alignment,
+            Slice<u8> memory,
+            mem::Alignment alignment,
             usize new_len,
             usize ra
         ) {
@@ -34,7 +34,7 @@ namespace ztd { namespace heap {
             return none;
         }
 
-        static void free(void*, slice<u8> memory, mem::alignment alignment, usize return_address) {
+        static void free(void*, Slice<u8> memory, mem::Alignment alignment, usize return_address) {
             // FIXME: Implement me
             // return unmap(@alignCast(memory));
         }

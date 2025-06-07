@@ -4,18 +4,18 @@
 #include "ztd/types.h"
 
 namespace ztd { namespace builtin {
-    struct type {
-        struct integer {
+    struct Type {
+        struct Int {
             bool is_signed;
             u16 bits;
         };
 
-        integer integer;
+        Int integer;
     };
 
     template<typename T>
-    type type_info() {
-        type t;
+    Type type_info() {
+        Type t;
         t.integer.is_signed = static_cast<T>(-1) < static_cast<T>(0);
         t.integer.bits = sizeof(T) * 8;
         return t;

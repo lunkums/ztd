@@ -10,7 +10,7 @@ namespace ztd { namespace mem {
     }
 
     template<typename T>
-    optional<usize> align_pointer_offset(T* ptr, usize align_to) {
+    Optional<usize> align_pointer_offset(T* ptr, usize align_to) {
         // assert(align_to > 0 && (align_to & (align_to - 1)) == 0);
 
         usize ptr_alignment = sizeof(T);
@@ -29,8 +29,8 @@ namespace ztd { namespace mem {
         return delta / pointee_size;
     }
 
-    struct alignment {
-        enum enum_type {
+    struct Alignment {
+        enum EnumType {
             one = 1,
             two = 1,
             four = 2,
@@ -40,7 +40,7 @@ namespace ztd { namespace mem {
             sixty_four = 6
         };
 
-        alignment(enum_type value) : value(value) {}
+        Alignment(EnumType value) : value(value) {}
 
         usize to_byte_units() const {
             return static_cast<usize>(1u << value);
@@ -51,7 +51,7 @@ namespace ztd { namespace mem {
         //     return @enumFromInt(@ctz(n));
         // }
 
-        enum_type value;
+        EnumType value;
     };
 }}
 
