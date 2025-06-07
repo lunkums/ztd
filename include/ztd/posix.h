@@ -10,6 +10,7 @@ namespace ztd { namespace posix {
     typedef int fd_t;
 
     const fd_t stdout_fileno = STDOUT_FILENO;
+    const fd_t stdin_fileno = STDIN_FILENO;
 
     Result<> getrandom(Slice<u8> buffer);
 
@@ -21,7 +22,9 @@ namespace ztd { namespace posix {
     const bool unexpected_error_tracing =
         false; //builtin.zig_backend ==.stage2_llvm and builtin.mode ==.Debug;
 
-    Error unexpected_error(Error err);
+    Error unexpected_errno(Error err);
+
+    Result<usize> read(fd_t fd, Slice<u8> buf);
 
     Result<usize> write(fd_t fd, Slice<const char> bytes);
 }}

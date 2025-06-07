@@ -144,6 +144,18 @@ namespace ztd {
             return Slice<T>(ptr, N);
         }
 
+        Slice<T> operator()(usize start) {
+            return Slice<T>(ptr + start, len - start);
+        }
+
+        Slice<T> operator()(usize start, usize end) {
+            if (start > N) start = N;
+            if (end > N) end = N;
+            if (start > end) start = end;
+
+            return Slice<T>(ptr + start, end - start);
+        }
+
         T ptr[N];
     };
 }

@@ -10,4 +10,12 @@ namespace ztd { namespace io {
     fs::File get_std_out() {
         return fs::File(get_std_out_handle());
     }
+
+    posix::fd_t get_std_in_handle() {
+        return posix::stdin_fileno;
+    }
+
+    fs::File get_std_in() {
+        return fs::File(get_std_in_handle());
+    }
 }}

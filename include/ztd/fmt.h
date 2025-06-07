@@ -103,6 +103,11 @@ namespace ztd { namespace fmt {
     };
 
     Result<> format(Slice<const char> fmt, va_list args);
+
+    template<typename T>
+    Result<T> parse_int(Slice<u8> buf, u8 base) {
+        return T();
+    }
 }}
 
 #endif
