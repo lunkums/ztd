@@ -1,3 +1,4 @@
+#include "ztd/builtin.h"
 #include "ztd/debug.h"
 #include "ztd/error.h"
 #include "ztd/fs.h"
@@ -5,5 +6,7 @@
 #include "ztd/io.h"
 #include "ztd/math.h"
 #include "ztd/mem.h"
+#include "ztd/posix.h"
+#include "ztd/random.h"
 #include "ztd/result.h"
 #include "ztd/types.h"

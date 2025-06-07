@@ -1,6 +1,7 @@
 #ifndef ZTD_TYPES_H
 #define ZTD_TYPES_H
 
+#include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -70,31 +71,6 @@ namespace ztd {
         bool m_has_value;
     };
 
-    template<typename T, usize N>
-    struct array {
-        T& operator[](usize index) {
-            return data[index];
-        }
-
-        const T& operator[](usize index) const {
-            return data[index];
-        }
-
-        usize len() const {
-            return N;
-        }
-
-        T* ptr() {
-            return data;
-        }
-
-        const T* ptr() const {
-            return data;
-        }
-
-        T data[N];
-    };
-
     // A fat pointer
     template<typename T>
     struct slice {
@@ -131,6 +107,44 @@ namespace ztd {
 
         T* ptr;
         usize len;
+    };
+
+    template<typename T, usize N>
+    struct array {
+        array() {}
+
+        array(const T (&arr)[N]) {
+            for (usize i = 0; i < N; ++i) {
+                ptr[i] = arr[i];
+            }
+        }
+
+        T& operator[](usize index) {
+            return ptr[index];
+        }
+
+        const T& operator[](usize index) const {
+            return ptr[index];
+        }
+
+        usize len() const {
+            return N;
+        }
+
+        T* operator*() {
+            return ptr;
+        }
+
+        // TODO: Should this be the & operator, instead?
+        operator slice<T>() {
+            return slice<T>(ptr, N);
+        }
+
+        operator const slice<T>() const {
+            return slice<T>(ptr, N);
+        }
+
+        T ptr[N];
     };
 }
 

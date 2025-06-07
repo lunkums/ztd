@@ -1,6 +1,8 @@
 #ifndef ZTD_MATH_H
 #define ZTD_MATH_H
 
+#include "ztd/builtin.h"
+
 namespace ztd { namespace math {
     const double e = 2.71828182845904523536028747135266249775724709369995;
     const double pi = 3.14159265358979323846264338327950288419716939937510;
@@ -21,8 +23,67 @@ namespace ztd { namespace math {
 
     template<typename T>
     bool is_power_of_two(T n) {
-        // assert(n> 0); // FIXME: Implement assert
+        assert(n > 0);
         return (n & (n - 1)) == 0;
+    }
+
+    template<typename T>
+    T max_int() {
+        if (builtin::type_info<T>().integer.is_signed) {
+            return static_cast<T>(~(static_cast<T>(1) << (sizeof(T) * 8 - 1)));
+        } else {
+            return ~static_cast<T>(0);
+        }
+    }
+
+    template<typename T>
+    T min_int() {
+        builtin::type info = builtin::type_info<T>();
+        u16 bit_count = info.integer.bits;
+        if (!info.integer.is_signed) return 0;
+        if (bit_count == 0) return 0;
+        return -(static_cast<T>(1) << (bit_count - 1));
+    }
+
+    template<typename T>
+    u64 mul_wide(T a, T b) {
+        // TODO: Impelement me to return an int of exactly twice the capacity
+        return static_cast<u64>(a) * b;
+    }
+
+    template<typename T>
+    result<T> div_ceil(T numerator, T denominator) {
+        // TODO: Implement setRuntimeSafety
+        //@setRuntimeSafety(false);
+        if (denominator == 0) return error("division by zero");
+        if (numerator < 0 and denominator < 0) {
+            if (numerator == min_int<T>() and denominator == -1) return error("overflow");
+            return builtin::div_floor<T>(numerator + 1, denominator) + 1;
+        }
+        if (numerator > 0 and denominator > 0)
+            return builtin::div_floor<T>(numerator - 1, denominator) + 1;
+        return numerator / denominator;
+    }
+
+    template<typename T, typename U>
+    T rotl(T x, U r) {
+        if (false /*builtin::type_info<T>() ==.vector*/) {
+            // const C = @typeInfo(T).vector.child;
+            // if (C == u0) return 0;
+
+            // if (@typeInfo(C).int.signedness ==.signed) {
+            //     @compileError("cannot rotate signed integers");
+            // }
+            // const ar : Log2Int(C) = @intCast(@mod(r, @typeInfo(C).int.bits));
+            // return (x << @splat(ar)) | (x >> @splat(1 + % ~ar));
+        } else if (builtin::type_info<T>().integer.is_signed) {
+            // @compileError("cannot rotate signed integer");
+            throw 1;
+        } else {
+            if (builtin::type_info<T>().integer.bits == 0) return 0;
+
+            return (x << r) | (x >> (builtin::type_info<T>().integer.bits - r));
+        }
     }
 }}
 

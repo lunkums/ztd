@@ -5,6 +5,12 @@
 
 namespace ztd { namespace fs {
     struct file {
+        typedef int Handle;
+
+        Handle handle;
+
+        file(Handle handle) : handle(handle) {}
+
         io::writer writer();
     };
 }}
