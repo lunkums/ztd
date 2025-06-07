@@ -1,6 +1,6 @@
 #include <ztd.h>
 
 int main() {
-    ztd::io::Writer stdout = ztd::io::get_std_out().writer();
-    ZTD_TRY(stdout.print("hello, world!\n"));
+    ztd::fs::File::Writer std_out = ztd::io::get_std_out().writer();
+    ZTD_TRY(std_out.print("hello, world!\n"));
 }

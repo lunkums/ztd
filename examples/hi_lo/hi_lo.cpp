@@ -4,7 +4,7 @@ using namespace ztd;
 #include <stdio.h>
 
 int main() {
-    io::Writer writer = io::get_std_out().writer();
+    fs::File::Writer writer = io::get_std_out().writer();
     Array<u8, 1024> buffer;
     heap::FixedBufferAllocator fba = heap::FixedBufferAllocator::init(buffer);
     mem::Allocator allocator = fba.allocator();

@@ -12,7 +12,15 @@ namespace ztd { namespace fs {
 
         File(Handle handle) : handle(handle) {}
 
-        typedef io::Writer Writer;
+        static Result<usize> write(File self, Slice<const char> bytes) {
+            return self.write(bytes);
+        }
+
+        Result<usize> write(Slice<const char> bytes) {
+            return posix::write(handle, bytes);
+        }
+
+        typedef io::GenericWriter<File, &File::write> Writer;
 
         Writer writer();
     };

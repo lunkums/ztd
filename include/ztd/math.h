@@ -2,6 +2,7 @@
 #define ZTD_MATH_H
 
 #include "ztd/builtin.h"
+#include "ztd/result.h"
 
 namespace ztd { namespace math {
     const double e = 2.71828182845904523536028747135266249775724709369995;

@@ -12,6 +12,18 @@ namespace ztd { namespace posix {
     const fd_t stdout_fileno = STDOUT_FILENO;
 
     Result<> getrandom(Slice<u8> buffer);
+
+    /// Whether or not `error.Unexpected` will print its value and a stack trace.
+    ///
+    /// If this happens the fix is to add the error code to the corresponding
+    /// switch expression, possibly introduce a new error in the error set, and
+    /// send a patch to Zig.
+    const bool unexpected_error_tracing =
+        false; //builtin.zig_backend ==.stage2_llvm and builtin.mode ==.Debug;
+
+    Error unexpected_error(Error err);
+
+    Result<usize> write(fd_t fd, Slice<const char> bytes);
 }}
 
 #endif

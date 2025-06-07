@@ -21,8 +21,14 @@ elseif(MSVC)
 endif()
 
 # file(GLOB ZTD_SOURCES "src/*.cpp")
-set(ZTD_SOURCES "src/fs/file.cpp" "src/io/writer.cpp" "src/debug.cpp"
-                "src/io.cpp" "src/posix.cpp")
+set(ZTD_SOURCES
+    "src/fs/file.cpp"
+    "src/io/writer.cpp"
+    "src/debug.cpp"
+    "src/fmt.cpp"
+    "src/io.cpp"
+    "src/posix.cpp"
+    "src/unicode.cpp")
 
 add_library(ztd STATIC ${ZTD_SOURCES})
 
