@@ -1,17 +1,17 @@
-#include <ztd.h>
+#include <zta.h>
 
 int main() {
-    ztd::fs::File::Writer std_out = ztd::io::get_std_out().writer();
-    ztd::usize i = 1;
+    zta::fs::File::Writer std_out = zta::io::get_std_out().writer();
+    zta::usize i = 1;
     while (i <= 16) {
         if (i % 15 == 0) {
-            ZTD_TRY(std_out.write_all("fizzbuzz\n"));
+            ZTA_TRY(std_out.write_all("fizzbuzz\n"));
         } else if (i % 3 == 0) {
-            ZTD_TRY(std_out.write_all("fizz\n"));
+            ZTA_TRY(std_out.write_all("fizz\n"));
         } else if (i % 5 == 0) {
-            ZTD_TRY(std_out.write_all("buzz\n"));
+            ZTA_TRY(std_out.write_all("buzz\n"));
         } else {
-            ZTD_TRY(std_out.print("{d}\n", i));
+            ZTA_TRY(std_out.print("{d}\n", i));
         }
         i += 1;
     }

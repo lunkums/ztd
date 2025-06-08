@@ -1,10 +1,10 @@
-#ifndef ZTD_MEM_H
-#define ZTD_MEM_H
+#ifndef ZTA_MEM_H
+#define ZTA_MEM_H
 
-#include "ztd/mem/alignment.h"
-#include "ztd/mem/allocator.h"
+#include "zta/mem/alignment.h"
+#include "zta/mem/allocator.h"
 
-namespace ztd { namespace mem {
+namespace zta { namespace mem {
     template<typename T>
     Slice<u8> as_bytes(T* ptr) {
         // TODO: Verify this formally

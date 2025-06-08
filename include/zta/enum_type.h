@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
 
-#ifndef ZTD_ENUM_TYPE_INCLUDED
-#define ZTD_ENUM_TYPE_INCLUDED
+#ifndef ZTA_ENUM_TYPE_INCLUDED
+#define ZTA_ENUM_TYPE_INCLUDED
 
 ///\defgroup EnumType EnumType
 /// Smart enumerations.<br>
@@ -44,12 +44,12 @@ SOFTWARE.
 ///     West  = 270
 ///   };
 ///
-///   ZTD_DECLARE_ENUM_TYPE(CompassDirection, int)
-///   ZTD_ENUM_TYPE(North, "North")
-///   ZTD_ENUM_TYPE(South, "South")
-///   ZTD_ENUM_TYPE(East,  "East")
-///   ZTD_ENUM_TYPE(West,  "West")
-///   ZTD_END_ENUM_TYPE
+///   ZTA_DECLARE_ENUM_TYPE(CompassDirection, int)
+///   ZTA_ENUM_TYPE(North, "North")
+///   ZTA_ENUM_TYPE(South, "South")
+///   ZTA_ENUM_TYPE(East,  "East")
+///   ZTA_ENUM_TYPE(West,  "West")
+///   ZTA_END_ENUM_TYPE
 /// };
 ///\endcode
 /// <b>Using the enumeration.</b>
@@ -68,15 +68,15 @@ SOFTWARE.
 ///
 /// std::cout << "Direction = " << direction.c_str(); // Prints "Direction = North"
 ///\endcode
-/// If a conversion to a string is not required then the 'ZTD_ENUM_TYPE' declaration may be omitted.
+/// If a conversion to a string is not required then the 'ZTA_ENUM_TYPE' declaration may be omitted.
 /// In that case the c_str() function will return a "?". This will also be the case for any
-/// enumeration value that does not have an ZTD_ENUM_TYPE entry.
+/// enumeration value that does not have an ZTA_ENUM_TYPE entry.
 ///\ingroup utilities
 
 //*****************************************************************************
 // The declaration of the member functions and the first section of the 'c_str' function.
 //*****************************************************************************
-#define ZTD_DECLARE_ENUM_TYPE(TypeName, ValueType) \
+#define ZTA_DECLARE_ENUM_TYPE(TypeName, ValueType) \
     typedef ValueType value_type; \
     TypeName() : value(static_cast<EnumType>(value_type())) {} \
     TypeName(EnumType value_) : value(value_) {} \
@@ -95,14 +95,14 @@ SOFTWARE.
 //*****************************************************************************
 // A case in the 'c_str' function's switch statement.
 //*****************************************************************************
-#define ZTD_ENUM_TYPE(value, name) \
+#define ZTA_ENUM_TYPE(value, name) \
     case value: \
         return name;
 
 //*****************************************************************************
 // The final section of the 'c_str' function and the value declaration.
 //*****************************************************************************
-#define ZTD_END_ENUM_TYPE \
+#define ZTA_END_ENUM_TYPE \
     default: \
         return "?"; \
         } \

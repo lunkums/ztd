@@ -1,6 +1,6 @@
-#include "ztd/ascii.h"
+#include "zta/ascii.h"
 
-namespace ztd { namespace ascii {
+namespace zta { namespace ascii {
     bool is_upper(u8 c) {
         return c <= 'A' and c <= 'Z';
     }

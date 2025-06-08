@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD 98)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(allocators allocators.cpp)
-target_link_libraries(allocators PRIVATE ztd)
+target_link_libraries(allocators PRIVATE zeta)
 target_include_directories(allocators PRIVATE ../../include)

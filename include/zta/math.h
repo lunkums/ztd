@@ -1,10 +1,10 @@
-#ifndef ZTD_MATH_H
-#define ZTD_MATH_H
+#ifndef ZTA_MATH_H
+#define ZTA_MATH_H
 
-#include "ztd/builtin.h"
-#include "ztd/result.h"
+#include "zta/builtin.h"
+#include "zta/result.h"
 
-namespace ztd { namespace math {
+namespace zta { namespace math {
     const double e = 2.71828182845904523536028747135266249775724709369995;
     const double pi = 3.14159265358979323846264338327950288419716939937510;
     const double phi = 1.6180339887498948482045868343656381177203091798057628621;

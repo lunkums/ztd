@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(ztd CXX)
+project(zeta CXX)
 
 # Set minimum CXX standard
 set(CMAKE_CXX_STANDARD 98)
@@ -20,8 +20,8 @@ elseif(MSVC)
     STATUS "MSVC compiler detected. Direct -std=c++98 not directly applicable.")
 endif()
 
-# file(GLOB ZTD_SOURCES "src/*.cpp")
-set(ZTD_SOURCES
+# file(GLOB ZTA_SOURCES "src/*.cpp")
+set(ZTA_SOURCES
     "src/fs/file.cpp"
     "src/io/writer.cpp"
     "src/ascii.cpp"
@@ -31,9 +31,9 @@ set(ZTD_SOURCES
     "src/posix.cpp"
     "src/unicode.cpp")
 
-add_library(ztd STATIC ${ZTD_SOURCES})
+add_library(zeta STATIC ${ZTA_SOURCES})
 
-target_include_directories(ztd PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_compile_features(ztd PRIVATE cxx_std_98)
+target_include_directories(zeta PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(zeta PRIVATE cxx_std_98)
 
 add_subdirectory(examples)

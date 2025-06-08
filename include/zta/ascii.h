@@ -1,9 +1,9 @@
-#ifndef ZTD_ASCII_H
-#define ZTD_ASCII_H
+#ifndef ZTA_ASCII_H
+#define ZTA_ASCII_H
 
-#include "ztd/types.h"
+#include "zta/types.h"
 
-namespace ztd { namespace ascii {
+namespace zta { namespace ascii {
     /// The C0 control codes of the ASCII encoding.
     ///
     /// See also: https://en.wikipedia.org/wiki/C0_and_C1_control_codes and `isControl`

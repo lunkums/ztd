@@ -1,9 +1,9 @@
-#include "ztd/debug.h"
+#include "zta/debug.h"
 
 #include <stdarg.h>
 #include <stdio.h>
 
-namespace ztd { namespace debug {
+namespace zta { namespace debug {
     void print(const char* fmt, ...) {
         // FIXME: This should implement Zig-style format printing, not C-style
         va_list args;

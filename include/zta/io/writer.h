@@ -1,13 +1,13 @@
-#ifndef ZTD_IO_WRITER_H
-#define ZTD_IO_WRITER_H
+#ifndef ZTA_IO_WRITER_H
+#define ZTA_IO_WRITER_H
 
-#include "ztd/fmt.h"
-#include "ztd/result.h"
+#include "zta/fmt.h"
+#include "zta/result.h"
 
 #include <stdarg.h>
 #include <stdio.h>
 
-namespace ztd { namespace io {
+namespace zta { namespace io {
     template<
         typename Context,
         Result<usize> (*const write_fn)(Context context, Slice<const char> bytes)>

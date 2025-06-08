@@ -1,12 +1,12 @@
-#ifndef ZTD_ERROR_H
-#define ZTD_ERROR_H
+#ifndef ZTA_ERROR_H
+#define ZTA_ERROR_H
 
-#include "ztd/types.h"
+#include "zta/types.h"
 
-namespace ztd {
+namespace zta {
     class Error {
       public:
-        Error() : m_what(ZTD_NULL) {}
+        Error() : m_what(ZTA_NULL) {}
         explicit Error(const char* message) : m_what(message) {}
 
         const char* what() const {

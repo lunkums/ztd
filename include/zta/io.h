@@ -1,10 +1,10 @@
-#ifndef ZTD_IO_H
-#define ZTD_IO_H
+#ifndef ZTA_IO_H
+#define ZTA_IO_H
 
-#include "ztd/fs/file.h"
-#include "ztd/io/writer.h"
+#include "zta/fs/file.h"
+#include "zta/io/writer.h"
 
-namespace ztd { namespace io {
+namespace zta { namespace io {
     posix::fd_t get_std_out_handle();
 
     fs::File get_std_out();

@@ -1,8 +1,8 @@
-#include "ztd/io.h"
+#include "zta/io.h"
 
-#include "ztd/posix.h"
+#include "zta/posix.h"
 
-namespace ztd { namespace io {
+namespace zta { namespace io {
     posix::fd_t get_std_out_handle() {
         return posix::stdout_fileno;
     }

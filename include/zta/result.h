@@ -1,9 +1,9 @@
-#ifndef ZTD_RESULT_H
-#define ZTD_RESULT_H
+#ifndef ZTA_RESULT_H
+#define ZTA_RESULT_H
 
-#include "ztd/error.h"
+#include "zta/error.h"
 
-namespace ztd {
+namespace zta {
     struct Ok {
         explicit Ok() {}
     };
@@ -71,11 +71,11 @@ namespace ztd {
             return &m_storage.m_data;
         }
 
-        ztd::Error& error() {
+        zta::Error& error() {
             return m_storage.m_error;
         }
 
-        const ztd::Error& error() const {
+        const zta::Error& error() const {
             return m_storage.m_error;
         }
       private:
@@ -83,7 +83,7 @@ namespace ztd {
         // supports POD and error is a complex Type
         struct Storage {
             T m_data;
-            ztd::Error m_error;
+            zta::Error m_error;
         };
 
         Storage m_storage;
@@ -91,17 +91,17 @@ namespace ztd {
     };
 }
 
-#define ZTD_CONCAT_IMPL(a, b) a##b
-#define ZTD_CONCAT(a, b) ZTD_CONCAT_IMPL(a, b)
+#define ZTA_CONCAT_IMPL(a, b) a##b
+#define ZTA_CONCAT(a, b) ZTA_CONCAT_IMPL(a, b)
 
-#define ZTD_UNIQUE_NAME(base) ZTD_CONCAT(ZTD_CONCAT(base, _), __LINE__)
+#define ZTA_UNIQUE_NAME(base) ZTA_CONCAT(ZTA_CONCAT(base, _), __LINE__)
 
 // TODO: Update this macro to allow the user to specify a Type for the result
-#define ZTD_TRY(expr) \
+#define ZTA_TRY(expr) \
     do { \
-        ztd::Result<> ZTD_UNIQUE_NAME(ztd_result) = (expr); \
-        if (ZTD_UNIQUE_NAME(ztd_result).is_error()) { \
-            return ZTD_UNIQUE_NAME(ztd_result).error(); \
+        zta::Result<> ZTA_UNIQUE_NAME(zta_result) = (expr); \
+        if (ZTA_UNIQUE_NAME(zta_result).is_error()) { \
+            return ZTA_UNIQUE_NAME(zta_result).error(); \
         } \
     } while (0)
 

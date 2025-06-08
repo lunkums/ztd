@@ -1,6 +1,6 @@
-#include "ztd/fmt.h"
+#include "zta/fmt.h"
 
-namespace ztd { namespace fmt {
+namespace zta { namespace fmt {
     Result<> format(Slice<const char> fmt, va_list args) {
         usize i = 0;
         Slice<const char> literal = "";
@@ -40,7 +40,7 @@ namespace ztd { namespace fmt {
             // Write out the literal
             if (literal.len != 0) {
                 // FIXME: Pass in the writer
-                // ZTD_TRY(writer.write_all(literal));
+                // ZTA_TRY(writer.write_all(literal));
                 literal = "";
             }
 

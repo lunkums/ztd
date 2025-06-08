@@ -1,10 +1,10 @@
-#ifndef ZTD_RANDOM_H
-#define ZTD_RANDOM_H
+#ifndef ZTA_RANDOM_H
+#define ZTA_RANDOM_H
 
-#include "ztd/builtin.h"
-#include "ztd/math.h"
+#include "zta/builtin.h"
+#include "zta/math.h"
 
-namespace ztd {
+namespace zta {
     struct Random {
         typedef void (*FillFn)(void*, Slice<u8>);
 
@@ -137,7 +137,7 @@ namespace ztd {
             }
 
             Random random() {
-                return ztd::Random::init(this, &Xoshiro256::fill);
+                return zta::Random::init(this, &Xoshiro256::fill);
             }
 
             u64 next() {

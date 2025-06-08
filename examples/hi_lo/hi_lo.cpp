@@ -1,5 +1,5 @@
-#include <ztd.h>
-using namespace ztd;
+#include <zta.h>
+using namespace zta;
 
 #include <stdio.h>
 

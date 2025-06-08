@@ -1,10 +1,10 @@
-#ifndef ZTD_FS_FILE_H
-#define ZTD_FS_FILE_H
+#ifndef ZTA_FS_FILE_H
+#define ZTA_FS_FILE_H
 
-#include "ztd/io/writer.h"
-#include "ztd/posix.h"
+#include "zta/io/writer.h"
+#include "zta/posix.h"
 
-namespace ztd { namespace fs {
+namespace zta { namespace fs {
     struct File {
         typedef posix::fd_t Handle;
 

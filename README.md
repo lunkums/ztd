@@ -1,4 +1,4 @@
-# ztd
+# Zeta
 
 A total C++ standard library replacement, inspired by [Zig](https://ziglang.org/).
 
@@ -50,9 +50,3 @@ Conclusion:
 - C++98 is about as simple as C, but with helpful syntatic sugar for features that programmers already hack into C
 - C++ standards beyond C++98 didn't need more complex language features, they just needed a better standard library to work from
 - We may not need a "better C++" (i.e. Rust, Zig, Carbon), but a better library for C++98
-
-## Etymology
-
-Take `std` and flip the `s` around. You get `ztd`.
-
-You could also argue `ztd` is short for `Zig-std`.

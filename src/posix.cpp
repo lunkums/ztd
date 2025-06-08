@@ -1,14 +1,14 @@
-#include "ztd/posix.h"
+#include "zta/posix.h"
 
-#include "ztd/builtin.h"
+#include "zta/builtin.h"
 
 #include <errno.h>
 #include <stdlib.h>
 #include <time.h>
 
-namespace ztd { namespace posix {
+namespace zta { namespace posix {
     Result<> getrandom(Slice<u8> buffer) {
-        std::srand(time(ZTD_NULL));
+        std::srand(time(ZTA_NULL));
         for (usize i = 0; i < buffer.len; ++i) {
             buffer[i] = std::rand() % 256;
         }

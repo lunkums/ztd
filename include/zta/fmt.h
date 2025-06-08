@@ -1,15 +1,15 @@
-#ifndef ZTD_FMT_H
-#define ZTD_FMT_H
+#ifndef ZTA_FMT_H
+#define ZTA_FMT_H
 
-#include "ztd/ascii.h"
-#include "ztd/enum_type.h"
-#include "ztd/mem/alignment.h"
-#include "ztd/result.h"
-#include "ztd/unicode.h"
+#include "zta/ascii.h"
+#include "zta/enum_type.h"
+#include "zta/mem/alignment.h"
+#include "zta/result.h"
+#include "zta/unicode.h"
 
 #include <stdarg.h>
 
-namespace ztd { namespace fmt {
+namespace zta { namespace fmt {
     struct Alignment {
         enum EnumType {
             left,
@@ -17,11 +17,11 @@ namespace ztd { namespace fmt {
             right
         };
 
-        ZTD_DECLARE_ENUM_TYPE(Alignment, int)
-        ZTD_ENUM_TYPE(left, "left")
-        ZTD_ENUM_TYPE(center, "center")
-        ZTD_ENUM_TYPE(right, "right")
-        ZTD_END_ENUM_TYPE
+        ZTA_DECLARE_ENUM_TYPE(Alignment, int)
+        ZTA_ENUM_TYPE(left, "left")
+        ZTA_ENUM_TYPE(center, "center")
+        ZTA_ENUM_TYPE(right, "right")
+        ZTA_END_ENUM_TYPE
     };
 
     // TODO: Should be a tagged union
@@ -93,9 +93,9 @@ namespace ztd { namespace fmt {
             used_args(used_args) {}
 
 // FIXME: Implement the macro. Does it even need to be a macro?
-#define ZTD_POP_COUNT(x) x
+#define ZTA_POP_COUNT(x) x
         bool has_unused_args() {
-            return ZTD_POP_COUNT(used_args) != args_len;
+            return ZTA_POP_COUNT(used_args) != args_len;
         }
 
         usize next_arg;

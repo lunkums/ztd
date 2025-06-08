@@ -1,9 +1,9 @@
-#ifndef ZTD_BUILTIN_H
-#define ZTD_BUILTIN_H
+#ifndef ZTA_BUILTIN_H
+#define ZTA_BUILTIN_H
 
-#include "ztd/types.h"
+#include "zta/types.h"
 
-namespace ztd { namespace builtin {
+namespace zta { namespace builtin {
     struct Type {
         struct Int {
             bool is_signed;

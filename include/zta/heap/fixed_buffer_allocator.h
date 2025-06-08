@@ -1,11 +1,11 @@
-#ifndef ZTD_HEAP_FIXED_BUFFER_ALLOCATOR_H
-#define ZTD_HEAP_FIXED_BUFFER_ALLOCATOR_H
+#ifndef ZTA_HEAP_FIXED_BUFFER_ALLOCATOR_H
+#define ZTA_HEAP_FIXED_BUFFER_ALLOCATOR_H
 
-#include "ztd/mem.h"
-#include "ztd/mem/allocator.h"
-#include "ztd/types.h"
+#include "zta/mem.h"
+#include "zta/mem/allocator.h"
+#include "zta/types.h"
 
-namespace ztd { namespace heap {
+namespace zta { namespace heap {
     struct FixedBufferAllocator {
         static Optional<u8*> alloc(void* ctx, usize n, mem::Alignment alignment, usize ra) {
             return reinterpret_cast<FixedBufferAllocator*>(ctx)->alloc(n, alignment, ra);

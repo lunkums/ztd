@@ -1,7 +1,7 @@
-#ifndef ZTD_HEAP_PAGE_ALLOCATOR_H
-#define ZTD_HEAP_PAGE_ALLOCATOR_H
+#ifndef ZTA_HEAP_PAGE_ALLOCATOR_H
+#define ZTA_HEAP_PAGE_ALLOCATOR_H
 
-namespace ztd { namespace heap {
+namespace zta { namespace heap {
     struct PageAllocator {
         static Optional<u8*> alloc(void*, usize n, mem::Alignment alignment, usize ra) {
             // FIXME: Implement me

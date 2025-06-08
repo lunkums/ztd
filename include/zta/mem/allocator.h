@@ -1,9 +1,9 @@
-#ifndef ZTD_MEM_ALLOCATOR_H
-#define ZTD_MEM_ALLOCATOR_H
+#ifndef ZTA_MEM_ALLOCATOR_H
+#define ZTA_MEM_ALLOCATOR_H
 
-#include "ztd/mem/alignment.h"
+#include "zta/mem/alignment.h"
 
-namespace ztd { namespace mem {
+namespace zta { namespace mem {
     struct Allocator {
         struct VTable {
             // void* (*alloc)(std::size_t len, Alignment alignment, std::size_t ret_addr);

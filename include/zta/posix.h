@@ -1,12 +1,12 @@
-#ifndef ZTD_POSIX_H
-#define ZTD_POSIX_H
+#ifndef ZTA_POSIX_H
+#define ZTA_POSIX_H
 
-#include "ztd/result.h"
-#include "ztd/types.h"
+#include "zta/result.h"
+#include "zta/types.h"
 
 #include <unistd.h>
 
-namespace ztd { namespace posix {
+namespace zta { namespace posix {
     typedef int fd_t;
 
     const fd_t stdout_fileno = STDOUT_FILENO;

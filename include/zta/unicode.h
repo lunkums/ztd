@@ -1,10 +1,10 @@
-#ifndef ZTD_UNICODE_H
-#define ZTD_UNICODE_H
+#ifndef ZTA_UNICODE_H
+#define ZTA_UNICODE_H
 
-#include "ztd/result.h"
-#include "ztd/types.h"
+#include "zta/result.h"
+#include "zta/types.h"
 
-namespace ztd { namespace unicode {
+namespace zta { namespace unicode {
     const u21 replacement_character = 0xFFFD;
 
     Result<u3> utf8_byte_sequence_length(u8 first_byte);

@@ -1,13 +1,13 @@
-#ifndef ZTD_TYPES_H
-#define ZTD_TYPES_H
+#ifndef ZTA_TYPES_H
+#define ZTA_TYPES_H
 
 #include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
 
-#define ZTD_NULL NULL
+#define ZTA_NULL NULL
 
-namespace ztd {
+namespace zta {
     // ********************************************************************************************
     // Primitive Types
     // ********************************************************************************************
@@ -74,7 +74,7 @@ namespace ztd {
     // A fat pointer
     template<typename T>
     struct Slice {
-        Slice() : ptr(ZTD_NULL), len(0) {}
+        Slice() : ptr(ZTA_NULL), len(0) {}
 
         template<usize N>
         Slice(T (&ptr)[N]) : ptr(ptr), len(N) {}

@@ -1,9 +1,9 @@
-#ifndef ZTD_MEM_ALIGNMENT_H
-#define ZTD_MEM_ALIGNMENT_H
+#ifndef ZTA_MEM_ALIGNMENT_H
+#define ZTA_MEM_ALIGNMENT_H
 
-#include "ztd/math.h"
+#include "zta/math.h"
 
-namespace ztd { namespace mem {
+namespace zta { namespace mem {
     template<typename T>
     bool is_valid_align(T alignment) {
         return alignment > 0 and math::is_power_of_two(alignment);
