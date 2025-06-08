@@ -30,7 +30,7 @@ int main() {
     while (guesses_made < max_guesses and !won) {
         writer.write("Next guess: ");
 
-        Result<usize> result = std_in.read_all(buf);
+        Result<usize> result = std_in.read(buf);
         if (result.is_error()) {
             continue;
         }
@@ -62,5 +62,9 @@ int main() {
                 writer.write("Too high! Try lower.\n\n");
             }
         }
+    }
+
+    if (!won) {
+        writer.write("You lost! Better luck next time.\n");
     }
 }

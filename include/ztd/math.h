@@ -52,6 +52,53 @@ namespace ztd { namespace math {
         return static_cast<u64>(a) * b;
     }
 
+    /// Returns the product of a and b. Returns an error on overflow.
+    template<typename T>
+    Result<T> mul(T a, T b) {
+        T x = a * b;
+        if (a != 0 && x / a != b) {
+            return Error("overflow");
+        }
+        return x;
+    }
+
+    /// Returns the sum of a and b. Returns an error on overflow.
+    template<typename T>
+    Result<T> add(T a, T b) {
+        if (builtin::type_info<T>().integer.is_signed) {
+            if (b > 0 && a > max_int<T>() - b) {
+                return Error("overflow");
+            }
+            if (b < 0 && a < min_int<T>() - b) {
+                return Error("overflow");
+            }
+        } else {
+            if (a > max_int<T>() - b) {
+                return Error("overflow");
+            }
+        }
+        return a + b;
+    }
+
+    /// Returns a - b, or an error on overflow.
+    template<typename T>
+    Result<T> sub(T a, T b) {
+        if (builtin::type_info<T>().integer.is_signed) {
+            if (b < 0 && a > max_int<T>() + b) {
+                return Error("overflow");
+            }
+            if (b > 0 && a < min_int<T>() + b) {
+                return Error("overflow");
+            }
+        } else {
+            if (a < b) {
+                return Error("overflow");
+            }
+        }
+
+        return a - b;
+    }
+
     template<typename T>
     Result<T> div_ceil(T numerator, T denominator) {
         // TODO: Implement setRuntimeSafety
@@ -84,6 +131,17 @@ namespace ztd { namespace math {
             if (builtin::type_info<T>().integer.bits == 0) return 0;
 
             return (x << r) | (x >> (builtin::type_info<T>().integer.bits - r));
+        }
+    }
+
+    template<typename T, typename U>
+    Optional<T> cast(U x) {
+        if ((max_int<U>() > max_int<T>()) and x > max_int<T>()) {
+            return none;
+        } else if ((min_int<U>() < min_int<T>()) and x < min_int<T>()) {
+            return none;
+        } else {
+            return static_cast<T>(x);
         }
     }
 }}

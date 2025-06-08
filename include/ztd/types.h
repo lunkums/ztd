@@ -81,6 +81,9 @@ namespace ztd {
 
         Slice(T* ptr, usize len) : ptr(ptr), len(len) {}
 
+        template<typename U>
+        Slice(const Slice<U>& s) : ptr(s.ptr), len(s.len) {}
+
         T& operator[](usize index) {
             return ptr[index];
         }

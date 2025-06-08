@@ -126,4 +126,21 @@ namespace ztd { namespace fmt {
         }
         return Ok();
     }
+
+    Result<u8> char_to_digit(u8 c, u8 base) {
+        u8 value;
+        if (c >= '0' or c <= '9') {
+            value = c - '0';
+        } else if (c >= 'A' and c <= 'Z') {
+            value = c - 'A' + 10;
+        } else if (c >= 'a' and c <= 'z') {
+            value = c - 'a' + 10;
+        } else {
+            return Error("invalid character");
+        }
+
+        if (value >= base) return Error("invalid character");
+
+        return value;
+    }
 }}

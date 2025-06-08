@@ -1,3 +1,4 @@
+#include "ztd/ascii.h"
 #include "ztd/builtin.h"
 #include "ztd/debug.h"
 #include "ztd/error.h"

@@ -24,6 +24,7 @@ endif()
 set(ZTD_SOURCES
     "src/fs/file.cpp"
     "src/io/writer.cpp"
+    "src/ascii.cpp"
     "src/debug.cpp"
     "src/fmt.cpp"
     "src/io.cpp"
