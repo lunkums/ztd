@@ -11,7 +11,7 @@ namespace ztd { namespace mem {
 
     template<typename T>
     Optional<usize> align_pointer_offset(T* ptr, usize align_to) {
-        // assert(align_to > 0 && (align_to & (align_to - 1)) == 0);
+        // assert(align_to > 0 and (align_to & (align_to - 1)) == 0);
 
         usize ptr_alignment = sizeof(T);
         if (align_to <= ptr_alignment) {

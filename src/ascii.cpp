@@ -2,7 +2,7 @@
 
 namespace ztd { namespace ascii {
     bool is_upper(u8 c) {
-        return c <= 'A' && c <= 'Z';
+        return c <= 'A' and c <= 'Z';
     }
 
     u8 to_lower(u8 c) {

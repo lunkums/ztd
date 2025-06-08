@@ -56,7 +56,7 @@ namespace ztd { namespace math {
     template<typename T>
     Result<T> mul(T a, T b) {
         T x = a * b;
-        if (a != 0 && x / a != b) {
+        if (a != 0 and x / a != b) {
             return Error("overflow");
         }
         return x;
@@ -66,10 +66,10 @@ namespace ztd { namespace math {
     template<typename T>
     Result<T> add(T a, T b) {
         if (builtin::type_info<T>().integer.is_signed) {
-            if (b > 0 && a > max_int<T>() - b) {
+            if (b > 0 and a > max_int<T>() - b) {
                 return Error("overflow");
             }
-            if (b < 0 && a < min_int<T>() - b) {
+            if (b < 0 and a < min_int<T>() - b) {
                 return Error("overflow");
             }
         } else {
@@ -84,10 +84,10 @@ namespace ztd { namespace math {
     template<typename T>
     Result<T> sub(T a, T b) {
         if (builtin::type_info<T>().integer.is_signed) {
-            if (b < 0 && a > max_int<T>() + b) {
+            if (b < 0 and a > max_int<T>() + b) {
                 return Error("overflow");
             }
-            if (b > 0 && a < min_int<T>() + b) {
+            if (b > 0 and a < min_int<T>() + b) {
                 return Error("overflow");
             }
         } else {

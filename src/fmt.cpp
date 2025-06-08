@@ -23,7 +23,7 @@ namespace ztd { namespace fmt {
             bool unescape_brace = false;
 
             // Handle {{ and }}, those are un-escaped as single braces
-            if (i + 1 < fmt.len && fmt[i + 1] == fmt[i]) {
+            if (i + 1 < fmt.len and fmt[i + 1] == fmt[i]) {
                 unescape_brace = true;
                 // Make the first brace part of the literal...
                 end_index += 1;
@@ -57,7 +57,7 @@ namespace ztd { namespace fmt {
             i += 1;
 
             usize fmt_begin = i;
-            while (i < fmt.len && fmt[i] != '}') {
+            while (i < fmt.len and fmt[i] != '}') {
                 i += 1;
             }
             usize fmt_end = i;

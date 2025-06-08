@@ -5,9 +5,9 @@ namespace ztd { namespace unicode {
         // The switch is optimized much better than a "smart" approach using @clz
 
         if (first_byte <= 0x7F) return 1; // 0b0111_1111
-        if (first_byte >= 0xC0 && first_byte <= 0xDF) return 2; // 0b1100_0000 to 0b1101_1111
-        if (first_byte >= 0xE0 && first_byte <= 0xEF) return 3; // 0b1110_0000 to 0b1110_1111
-        if (first_byte >= 0xF0 && first_byte <= 0xF7) return 4; // 0b1111_0000 to 0b1111_0111
+        if (first_byte >= 0xC0 and first_byte <= 0xDF) return 2; // 0b1100_0000 to 0b1101_1111
+        if (first_byte >= 0xE0 and first_byte <= 0xEF) return 3; // 0b1110_0000 to 0b1110_1111
+        if (first_byte >= 0xF0 and first_byte <= 0xF7) return 4; // 0b1111_0000 to 0b1111_0111
 
         return Error("invalid UTF-8 start byte");
     }
